@@ -4,8 +4,8 @@ const mockFs = {
   readFileSync: jest.fn()
 };
 
-const { validateLocales, extractKeys, readJSONFilesInDir } = require('../scripts/helpers/check-locales.ts');
-const { logger } = require('../scripts/helpers/logger.ts');
+const { validateLocales, extractKeys, readJSONFilesInDir } = require('../scripts/helpers/check-locales');
+const { logger } = require('../scripts/helpers/logger');
 
 jest.mock('../scripts/helpers/logger', () => ({
   logger: {
@@ -74,7 +74,7 @@ describe('check-locales', () => {
 
     validateLocales();
 
-    expect(logger.info).toHaveBeenCalledWith('✅ All locale files have the same keys across all languages!');
+    expect(logger.info).toHaveBeenCalledWith('✓ All locale files have the same keys across all languages!');
     expect(mockExit).not.toHaveBeenCalled();
   });
 
@@ -184,7 +184,7 @@ describe('check-locales', () => {
 
     validateLocales();
 
-    expect(logger.info).toHaveBeenCalledWith('✅ All locale files have the same keys across all languages!');
+    expect(logger.info).toHaveBeenCalledWith('✓ All locale files have the same keys across all languages!');
   });
 
   it('should handle files with no missing keys', () => {
@@ -204,7 +204,7 @@ describe('check-locales', () => {
 
     validateLocales();
 
-    expect(logger.info).toHaveBeenCalledWith('✅ All locale files have the same keys across all languages!');
+    expect(logger.info).toHaveBeenCalledWith('✓ All locale files have the same keys across all languages!');
   });
 
   it('should log when skipping files found in only one language', () => {

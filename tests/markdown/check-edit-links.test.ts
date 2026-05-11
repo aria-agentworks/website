@@ -13,7 +13,7 @@ import {
 } from '../../scripts/markdown/check-edit-links';
 import { determineEditLinkData, processBatchData, testPaths } from '../fixtures/markdown/check-edit-links-data';
 
-jest.mock('../../scripts/helpers/logger.ts', () => ({
+jest.mock('../../scripts/helpers/logger', () => ({
   logger: { info: jest.fn() }
 }));
 jest.mock('node-fetch-2', () => jest.fn());
@@ -82,7 +82,7 @@ describe('URL Checker Tests', () => {
 
     it('should skip _section.md files', async () => {
       const paths = await generatePaths(testDir, editOptions);
-      const sectionFiles = paths.filter((p) => p.filePath.endsWith('_section.md'));
+      const sectionFiles = paths.filter(p => p.filePath.endsWith('_section.md'));
 
       expect(sectionFiles.length).toBe(0);
     });
@@ -120,13 +120,13 @@ describe('URL Checker Tests', () => {
       mockFetch.mockImplementation(() => Promise.resolve({ status: 200 }));
       const results = await processBatch(testBatch);
 
-      expect(results.filter((r) => r !== null).length).toBe(0);
+      expect(results.filter(r => r !== null).length).toBe(0);
     });
 
     it('should detect 404 URLs', async () => {
       mockFetch.mockImplementation(() => Promise.resolve({ status: 404 }));
       const results = await processBatch(testBatch);
-      const validResults = results.filter((r) => r !== null);
+      const validResults = results.filter(r => r !== null);
 
       expect(validResults.length).toBe(2);
       expect(validResults[0].editLink).toBe(testBatch[0].editLink);
@@ -149,7 +149,7 @@ describe('URL Checker Tests', () => {
 
       mockFetch.mockImplementation(() => Promise.resolve({ status: 404 }));
       const results = await processBatch(batchWithIgnored);
-      const validResults = results.filter((r) => r !== null);
+      const validResults = results.filter(r => r !== null);
 
       expect(validResults.length).toBe(2);
     });
