@@ -11,7 +11,7 @@ import {
   createToolFileContent
 } from '../helper/toolsObjectData';
 
-jest.mock('../scripts/helpers/logger.ts', () => ({
+jest.mock('../scripts/helpers/logger', () => ({
   logger: { warn: jest.fn(), error: jest.fn() }
 }));
 
@@ -84,7 +84,7 @@ describe('Tools Object', () => {
   it('should convert tools data correctly', async () => {
     const toolContent = createToolFileContent({
       title: 'Valid Tool',
-      categories: ['Category1' as unknown as Category]
+      categories: ['Category1 as unknown as Category']
     });
     const mockData = mockToolData(toolContent);
 
@@ -124,7 +124,7 @@ describe('Tools Object', () => {
   it('should add duplicate tool objects to the same category', async () => {
     const toolContent = createToolFileContent({
       title: 'Duplicate Tool',
-      categories: ['Category1' as unknown as Category]
+      categories: ['Category1 as unknown as Category']
     });
 
     const mockData = createMockData([
@@ -234,19 +234,19 @@ describe('Tools Object', () => {
       title: 'Z Tool',
       description: 'Z Tool Description',
       links: { repoUrl: 'https://github.com/asyncapi/z-tool' },
-      filters: { categories: ['Category1' as unknown as Category] }
+      filters: { categories: ['Category1 as unknown as Category'] }
     };
     const toolContentA = {
       title: 'A Tool',
       description: 'A Tool Description',
       links: { repoUrl: 'https://github.com/asyncapi/a-tool' },
-      filters: { categories: ['Category1' as unknown as Category] }
+      filters: { categories: ['Category1 as unknown as Category'] }
     };
     const toolContentM = {
       title: 'M Tool',
       description: 'M Tool Description',
       links: { repoUrl: 'https://github.com/asyncapi/m-tool' },
-      filters: { categories: ['Category1' as unknown as Category] }
+      filters: { categories: ['Category1 as unknown as Category'] }
     };
 
     const mockData = createMockData([
